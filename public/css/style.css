@@ -1,0 +1,146 @@
+body {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/*************************** navbar styling ******************************/
+
+.navbar {
+  height: 5rem;
+  background-color: white;
+}
+.fa-compass {
+  color: #fe424d;
+  font-size: 2rem;
+}
+.nav-link {
+  color: #222222 !important;
+}
+.f-info-links a {
+  text-decoration: none;
+  color: #222222;
+}
+.f-info-links a:hover {
+  text-decoration: underline;
+}
+
+.f-info-socials i {
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.f-info-socials {
+  width: 100%;
+  font-size: 1.5rem;
+  margin-right: 2rem;
+}
+
+.f-info {
+  text-align: center;
+  height: 8rem;
+  background-color: #ebebeb;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: space evenly;
+}
+
+/*************************** main body styling ******************************/
+.container {
+  flex: 1 !important;
+  margin: 0;
+}
+
+.index_main_div {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+.listing-link {
+  margin-bottom: 1rem !important;
+}
+
+/*************************** new.ejs styling ******************************/
+
+.add-btn {
+  background-color: #fe424d !important;
+  border: none !important;
+}
+/*************************** show.ejs styling ******************************/
+.show-card {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.show-img {
+  height: 30vh;
+}
+
+.btns {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+/*************************** edit.ejs styling ******************************/
+
+.edit-btn {
+  background-color: #fe424d !important;
+  border: none !important;
+  margin-bottom: 2rem;
+}
+
+.listing-card {
+  width: 70% !important;
+  margin: 0 auto !important;
+}
+
+.delete-btn {
+  margin-left: 1rem;
+}
+.review_form_div {
+  width: 70% !important;
+  margin: 2rem auto !important;
+}
+.actual_reviews_div {
+  width: 70% !important;
+  margin: 2rem auto !important;
+}
+
+.review_section {
+  width: 100% !important;
+}
+.review_section .card-body .card-text {
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+/* Review box css */
+.review_section {
+  border: 0.05rem solid black;
+  border-radius: 1rem;
+}
+.listing-link:hover {
+opacity:0.7;
+background-color: azure;
+
+}
+
+/* map */
+#map {
+  height: 400px;
+  width: 400px;
+  border: 4px solid black;
+}
