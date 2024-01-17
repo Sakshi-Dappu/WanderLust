@@ -15,7 +15,7 @@ module.exports.renderNewForm = (req, res) => {
 };
 
 module.exports.showListing = async (req, res) => {
-  let { id } = req.params; 
+  let { id } = req.params;
   const listing = await Listing.findById(id)
     .populate({
       path: "reviews",
@@ -36,19 +36,20 @@ module.exports.createListing = async (req, res, next) => {
   let response = await geocodingClient
     .forwardGeocode({
       query: "New Delhi, India",
-      limit: 1, 
+      limit: 1,
     })
     .send();
-  console.log(response); 
+
 
   const newListing = new Listing(req.body.listing);
   newListing.owner = req.user._id;
 
   newListing.geometry = response.body.features[0].geometry;
-console.log(newListing);
-  await newListing.save();
-  console.log(savedListing); 
-  req.flash("success", "New Listing Created!"); 
+ 
+
+let savedListing = await newListing.save();
+console.log(savedListing);
+  req.flash("success", "New Listing Created!");
   res.redirect("/listings");
 };
 

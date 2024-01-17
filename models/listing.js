@@ -7,7 +7,7 @@ const listingSchema = new Schema({
     type: String,
     required: true,
   },
-  description: String, 
+  description: String,
   image: {
     type: String,
     set: (v) =>
@@ -18,7 +18,7 @@ const listingSchema = new Schema({
   price: Number,
   location: String,
   country: String,
-  reviews: [ 
+  reviews: [
     {
       type: Schema.Types.ObjectId,
       ref: "Review",
@@ -34,11 +34,26 @@ const listingSchema = new Schema({
       enum: ["Point"],
       require: true,
     },
-    coordinates: { 
+    coordinates: {
       type: [Number],
       required: true,
     },
   },
+  category: {
+    type: String,
+    enum: [
+      "Trending",
+      "Rooms",
+      "Iconic Cities",
+      "Mountain Cities",
+      "Castles",
+      "Amazing Pools",
+      "Camping",
+      "Farms",
+      "Arctic",
+      "Beach",
+    ],
+  }, 
 });
 
 listingSchema.post("findOneAndDelete", async (listing) => {

@@ -1,27 +1,142 @@
 <% layout("layouts/boilerplate.ejs") %>
-<h3>All Listings</h3>
-<div class="row row-col-lg-3 row-cols-md-3 row-cols-sm-1 index_main_div">
-  <% for(let listing of allListings) { %> 
+
+<!-------------------------------------------------------- title icons ---------------------------------------------------------------->
+<style>
+  #filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  #filter {
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    opacity: 0.7;
+    font-size: 0.8rem;
+  }
+
+  #filter:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+   
+  .tax-info{
+    display: none;
+  }
+
+
+
+.tax-toggle{
+  border: 2px solid black;
+  height : 2.5rem;
+  border-radius: 2rem;
+  padding: 0.5rem;
+ margin-left: 10rem;
+}
+
+
+
+</style>
+
+<div id="filters">
+  <div id="filter">
+    <div><i class="fa-solid fa-fire" href=""></i></div>
+    <p>Trending</p>
+  </div>
+
+  <div id="filter">
+    <div><i class="fa-solid fa-bed" href="https://www.airbnb.co.in/a/discover/?account_id=31003615&campaign_id=303117718&ad_id=80951624440020&ad_group_id=1295224714906336&keyword_id=kwd-80951555865320:loc-90&device=c&c=.pi2.pk303117718_1295224714906336&ghost=true&msclkid=cb551231f6b814146dc27797e077f947&utm_source=bing&utm_medium=cpc&utm_campaign=IND%3ADTM%3ASRC%3ABRD%2BAirbnb%5BEXACT%5D&utm_term=airbnb&utm_content=Airbnb%3A%2BExact"></i></div>
+    <p>Rooms</p>
+  </div>
+
+  <div id="filter">
+    <div><i class="fa-solid fa-mountain-city" href="#"></i></div>
+    <p>Iconic Cities</p>
+  </div>
+
+  <div id="filter">
+    <div><i class="fa-solid fa-mountain" href="#"></i></div>
+    <p>Mountain Cities</p>
+  </div>
+
+  <div id="filter">
+    <div><i class="fa-brands fa-fort-awesome" href="#"></i></div>
+    <p>Castles</p>
+  </div>
+
+  <div id="filter">
+    <div><i class="fa-solid fa-person-swimming" href="#"></i></div>
+    <p>Amazing Pools</p>
+  </div>
+
+  <div id="filter">
+    <div><i class="fa-solid fa-campground" href="#"></i></div>
+    <p>Camping</p>
+  </div>
+
+  <div id="filter">
+    <div><i class="fa-solid fa-cow" href="#"></i></div>
+    <p>Farms</p>
+  </div>
+
+  <div id="filter">
+    <div><i class="fa-solid fa-person-snowboarding" href="#"></i></div>
+    <p>Arctic</p>
+  </div>
+
+  <div id="filter">
+    <div><i class="fa-solid fa-umbrella-beach" href="#"></i></div>
+    <p>Beach</p>
+  </div>
+
+
+
+<div class="tax-toggle">
+  <div class="form-check form-switch form-check-reverse">
+    <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse">
+    <label class="form-check-label" for="flexSwitchCheckReverse">Display after taxes</label>
+  </div>
+</div> 
+</div>
+</div>
+<!----------------------------------------------- Cards container---------------------------------->
+<div class="row row-col-lg-3 row-cols-md-3 row-cols-sm-1 mt-3 index_main_div">
+  <% for(let listing of allListings) { %>
   <a href="/listings/<%= listing._id %>" class="listing-link">
-    <div class="card col ">
+    <div class="card col">
       <img
         src="<%= listing.image %>"
         class="card-img-top"
         alt="listing_image"
         style="height: 20rem"
       />
-      
+      <div class="card-img-overlay"></div>
+
       <div class="card-body">
         <p class="card-text">
           <b><%= listing.title %> <br /></b>
         </p>
         <p class="card-text">
           &#8377;<%= listing.price.toLocaleString("en-IN") %> / night
+          <i class="tax-info"> + 18% GST</i>
         </p>
       </div>
-
-      
-    </div> 
+    </div>
   </a>
   <% } %>
 </div>
+<script>
+
+
+let taxSwitch = document.querySelector("#flexSwitchCheckReverse");
+taxSwitch.addEventListener("click", () => {
+  let taxInfo = document.querySelectorAll(".tax-info");
+  for (info of taxInfo) { 
+    if(info.style.display != "inline") {
+info.style.display = "inline";
+       } else { 
+info.style.display = "none";
+  }
+}
+});
+</script>

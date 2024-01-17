@@ -2,7 +2,13 @@
 <div class="row mt-3">
   <div class="col-8 offset-2">
     <h3>Edit your Listing</h3>
-    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+    <form 
+    method="POST" 
+    action="/listings/<%= listing._id %>?_method=PUT"
+    nonvalidate
+    class="needs-validation"
+    enctype="multipart/form-data"
+    >
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input
@@ -22,13 +28,13 @@
       </div>
  
       <div class="mb-3">
-        <label for="image" class="form-label">Image</label>
+        <label for="image" class="form-label"> Image Link</label>
         <input
+        placeholder="enter link/url" 
           name="listing[image]"
-          value="<%= listing.image %>"
           type="text"
           class="form-control"
-          required
+        
         />
       </div>
 
@@ -62,7 +68,26 @@
           class="form-control"
           required
         />
-      </div>
+
+    
+
+      <!-- <label for="category">Select Category  : </label>
+      <select name="category" id="category">
+        <option value="Rooms" >Rooms</option>
+        <option value="Iconic Cities" >Iconic Cities</option>
+        <option value="Mountain Cities" >Mountain Cities</option>
+        <option value="Castles" >Castles</option>
+        <option value="Amazing Pools" >Amazing Pools</option>
+        <option value="Camping">Camping</option>
+        <option value="Farms">Farms</option>
+        <option value="Arctic">Arctic</option>
+        <option value="Beach">Beach</option>
+      </select> -->
+
+
+    <br><br>
+
+
       <div width="50%">
         <button class="btn btn-dark edit-btn mt-3">Edit</button>
       </div>
