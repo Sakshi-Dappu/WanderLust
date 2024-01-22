@@ -1,30 +1,21 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
 const wrapAsync = require("../utils/wrapAsync.js");
-const ExpressError = require("../utils/ExpressError.js");
-const { listingSchema } = require("../schema.js");
-const { isLoggedIn, isOwner } = require("../middleware.js");
+const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
 const listingController = require("../controllers/listings.js");
 const multer = require("multer");
-const upload = multer({ dest: "uploads/ " });
-
-// const validateListing = (req, res, next) => {
-//   let error = listingSchema.validate(req.body);
-//   if (error) {
-   // let errMsg = error.details[0].message;
-//     return next(new ExpressError(400, error));
-//   } else {
-//     next();
-//   }
-// };
+const { storage } = require("../cloudConfig.js");
+const upload = multer({ storage });
 
 router
   .route("/")
   .get(wrapAsync(listingController.index))
-  .post( wrapAsync(listingController.createListing));
-// .post( upload.single('listing[image]'), (req, res) => {
-//   res.send(req.file);
-// });
+  .post(
+    upload.single("listing[image]"),
+    validateListing, 
+    wrapAsync(listingController.createListing)
+    );
+  
 
 //New Route
 router.get("/new", isLoggedIn, listingController.renderNewForm);
@@ -35,6 +26,7 @@ router
   .put(
     isLoggedIn,
     isOwner,
+    validateListing,
     wrapAsync(listingController.updateListing)
   )
   .delete(isLoggedIn, isOwner, wrapAsync(listingController.destroyListing));

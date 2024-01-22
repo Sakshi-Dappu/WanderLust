@@ -1,4 +1,9 @@
-require("dotenv").config()
+if(process.env.NODE_ENV != "production") {
+  require("dotenv").config();
+}
+
+console.log(process.env.SECRET);
+
 
 const express = require("express");
 const app = express();
@@ -36,12 +41,13 @@ async function main() {
   await mongoose.connect(MONGO_URL);
 }
 
+app.use(express.static(path.join(__dirname, "/public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
-app.use(express.static(path.join(__dirname, "/public")));
+
 
 const sessionOptions = {
   secret: "mysupersecretcode",
@@ -85,10 +91,10 @@ app.all("*", (req, res, next) => {
   next(new ExpressError(404, "Page Not Found!"));
 });
 
-// app.use((err, req, res, next) => {
-//   let { statusCode = 500, message = "Something went wrong!" } = err;
-//   res.status(statusCode).render("listings/error.ejs", { message });
-// });
+app.use((err, req, res, next) => {
+  let { statusCode = 500, message = "Something went wrong!" } = err;
+  res.status(statusCode).render("listings/error.ejs", { message });
+});
 
 app.listen(8080, () => {
   console.log("server is listening to port 8080");
