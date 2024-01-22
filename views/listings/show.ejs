@@ -1,4 +1,9 @@
 <% layout("layouts/boilerplate.ejs") %>
+<script>
+const mapToken = "<%= process.env.MAP_TOKEN %>";  
+const listing = <%- JSON.stringify(listing) %>; 
+</script>
+
 
 
 <div class="row mt-3 showpage_main_div">
@@ -160,5 +165,5 @@
     <div id="map"></div>
   </div>
 </div>
-
 <!-------------------------- Map ------------------------------------------->
+<script src="/js/map.js"></script>

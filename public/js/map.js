@@ -1,19 +1,26 @@
+try {
+  mapboxgl.accessToken = mapToken;
+  console.log(mapToken);
 
-mapboxgl.accessToken = accessToken;
-console.log(accessToken);
-  
-const map = new mapboxgl.Map({
-  container: "map",
-  style: "mapbox://styles/mapbox/streets-v12",
-  center: [ 73.85535000 ,18.51957000 ], //starting position [lng, lat]
-  zoom: 8,
-}); 
+  if (listing && listing.geometry && listing.geometry.coordinates) {
+    const map = new mapboxgl.Map({
+      container: "map",
+      center: listing.geometry.coordinates,
+      zoom: 9,
+    });
 
-
-console.log(coordinates);
-
-// Create a default Marker and add it to the map.
-// const marker = new mapboxgl.Marker()
-//   .setLngLat([12.554729, 55.70651]) //listing.geometry.coordinates
-//   .addTo(map);
- 
+    const marker = new mapboxgl.Marker({ color: "red" })
+      .setLngLat(listing.geometry.coordinates) 
+      .setPopup(
+        new mapboxgl.Popup({ offset: 25 }).setHTML(
+          `<h4>${listing.location}</h4>`
+        )
+      )
+      .addTo(map);
+  } else {
+    throw new Error("Please fill the details carefully!");
+  }
+} catch (error) {
+  console.error("An error occurred:", error);
+  throw new Error("Please fill the details carefully!");
+} 
