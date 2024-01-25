@@ -7,6 +7,17 @@ const multer = require("multer");
 const { storage } = require("../cloudConfig.js");
 const upload = multer({ storage });
 
+
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//(mapbox configurations)
+const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
+const mapToken = process.env.MAP_TOKEN;
+const geocodingClient = mbxGeocoding({ accessToken: mapToken });
+
+
+
+
 router
   .route("/")
   .get(wrapAsync(listingController.index))
@@ -19,6 +30,28 @@ router
 
 //New Route
 router.get("/new", isLoggedIn, listingController.renderNewForm);
+
+
+
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//(post route)
+router.post(
+  "/",
+  isLoggedIn,
+  validateListing,
+  wrapAsync(async (req, res) => {
+    let response = await geocodingClient
+      .forwardGeocode({
+        query: req.body.listing.location,
+        limit: 1,
+      })
+      .send();
+
+    })
+);
+
+
 
 router
   .route("/:id")

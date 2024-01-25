@@ -6,11 +6,11 @@ try {
     const map = new mapboxgl.Map({
       container: "map",
       center: listing.geometry.coordinates,
-      zoom: 9,
+      zoom: 12,
     });
 
     const marker = new mapboxgl.Marker({ color: "red" })
-      .setLngLat(listing.geometry.coordinates) 
+      .setLngLat(listing.geometry.coordinates)
       .setPopup(
         new mapboxgl.Popup({ offset: 25 }).setHTML(
           `<h4>${listing.location}</h4>`
@@ -23,4 +23,4 @@ try {
 } catch (error) {
   console.error("An error occurred:", error);
   throw new Error("Please fill the details carefully!");
-} 
+}
