@@ -1,11 +1,7 @@
 {
-
   "engines": {
-  "node": "v20.9.0"
+    "node": "v20.9.0"
   },
-
-
-
   "dependencies": {
     "@mapbox/mapbox-sdk": "^0.15.3",
     "cloudinary": "^1.41.3",
@@ -25,9 +21,9 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0"
   },
-  "name": "major-project-1-(air-bnb)",
+  "name": "Sakshi",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
