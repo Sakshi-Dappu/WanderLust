@@ -7,6 +7,7 @@
       action="/listings/<%= listing._id %>?_method=PUT"
       nonvalidate
       class="needs-validation"
+      enctype="multipart/form-data"
     >
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
@@ -27,15 +28,18 @@
       </div>
 
       <div class="mb-3">
-        <label for="image" class="form-label"> Image Link</label>
+        <label for="image" class="form-label"> Upload new image </label>
+        <input name="listing[image]" type="file" class="form-control" />
+      </div>
+
+      <!-- <div class="mb-3">
+        <label for="image" class="form-label"> Upload Listing Image</label>
         <input
-          placeholder="enter link/url"
-        value="<%= listing.image %>"
           name="listing[image]"
-          type="text"
+          type="file"
           class="form-control"
         />
-      </div>
+      </div> -->
 
       <div class="mb-3 col-md-4">
         <label for="price" class="form-label">Price</label>

@@ -5,7 +5,7 @@ const { listingSchema, reviewSchema } = require("./schema.js");
 
 const validateListing = (req, res, next) => {
   let { error } = listingSchema.validate(req.body);
-  let errorMsg =  "no worries";// error.details[0].message; 
+  let errorMsg = "error" //error.details[0].message; 
   if (error) {
     return next(new ExpressError(400, errorMsg));
   } else {
