@@ -6,11 +6,11 @@ const listingSchema = new Schema({
   title: {
     type: String,
     required: true,
-  },
+  }, 
   description: String,
   image: {
     url: String,
-    fillename: String,
+    filename: String,
   },
   price: Number,
   location: String,
