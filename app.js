@@ -90,7 +90,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => { 
+app.get("/search", (req, res) => {
+  res.send("Search");
+});
+
+app.get("/Home", (req, res) => {
   res.render("listings/home.ejs");
 });
 

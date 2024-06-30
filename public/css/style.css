@@ -140,12 +140,7 @@ body {
 
 
 
-/* map */
-#map {
-  height: 400px;
-  width: 400px;
-  border: 4px solid black;
-}
+
 .card {
   border: none !important;
   margin-bottom: 2rem;
@@ -175,4 +170,16 @@ text-decoration: none;
   background-color: white;
 }
 
- 
+ /* map */
+ #map { 
+  height: 400px;
+  width: 400px; 
+  border: 4px solid black; 
+ }  
+
+ /* #map {
+  height: 100%;
+  width: 100%;
+  border: 4px solid; /* Note: I added 'solid' to fix the syntax error in your code */
+/* }  */
+
