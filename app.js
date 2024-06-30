@@ -94,7 +94,7 @@ app.get("/search", (req, res) => {
   res.send("Search");
 });
 
-app.get("/Home", (req, res) => {
+app.get("/", (req, res) => {
   res.render("listings/home.ejs");
 });
 
