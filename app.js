@@ -16,13 +16,23 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
+<<<<<<< HEAD
 //const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";x
+=======
+//const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+>>>>>>> a3b43e837f37d6c6de7b8f8cbe5b0446cdd72cb9
 const dbUrl = process.env.ATLASDB_URL;
 
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
+<<<<<<< HEAD
 const Listing = require("./models/listing.js");
+=======
+
+// const listings = require("./routes/listing.js");
+// const reviews = require("./routes/review.js");
+>>>>>>> a3b43e837f37d6c6de7b8f8cbe5b0446cdd72cb9
 
 main()
   .then(() => {
@@ -88,6 +98,7 @@ app.use((req, res, next) => {
   next();
 });
 
+<<<<<<< HEAD
 app.get("/search", async(req, res) => {
   try {
     const query = req.query.query;
@@ -108,6 +119,10 @@ app.get("/search", async(req, res) => {
 console.error(error);
 res.status(500).send("An error occurred while searching. ");
 }
+=======
+app.get("/search", (req, res) => {
+  res.send("Search");
+>>>>>>> a3b43e837f37d6c6de7b8f8cbe5b0446cdd72cb9
 });
 
 app.get("/", (req, res) => {
@@ -126,7 +141,11 @@ app.use((err, req, res, next) => {
   let { statusCode = 500, message = "Something went wrong!" } = err;
   res.status(statusCode).render("listings/error.ejs", { message });
 });
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> a3b43e837f37d6c6de7b8f8cbe5b0446cdd72cb9
 app.listen(8080, () => {
   console.log("server is listening to port 8080");
 });
