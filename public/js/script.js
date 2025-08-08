@@ -21,3 +21,14 @@
     );
   });
 })();
+
+function Check() {
+ let response =  confirm("Are you sure to delete this listing ?");
+ if(response) {
+  console.log("OK");
+  return true;
+ } else {
+  console.log("cancel");
+  return false;
+ }
+}

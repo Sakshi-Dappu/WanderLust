@@ -1,0 +1,49 @@
+<% layout("layouts/boilerplate.ejs") %>
+<h1>Search results for <%= query %></h1>
+<div class="body">
+  <div style="margin-left: 2rem">
+    <div class="searchResultsPg">
+      <h2 style="color: rgb(144, 144, 214)">
+        <ul>
+          <!-- </h2> -->
+          <br />
+          <div>
+            <% if (listing.length > 0) { %>
+            <h3 style="color: rgb(144, 144, 214)"></h3>
+
+            <% listing.forEach(listing => { %>
+            <!-- <div class="row mt-3 showpage_main_div"> -->
+            <div class="col-8 offset-2 sakshi_div">
+              <h3><%= listing.title %></h3>
+
+              <div class="card col-6 offset-1 show-card listing-card">
+                <img
+                  src="<%= listing.image.url %>"
+                  class="card-img-top show-img"
+                  alt="listing_image"
+                />
+                <div class="card-body">
+                  <br />
+                  <p><%= listing.description %></p>
+
+                  <p class="card-text">
+                    Price : <% if (listing && listing.price) { %> &#8377; <%=
+                    listing.price.toLocaleString("en-IN") %> <% } %>
+                  </p>
+                  <p class="card-text">Location : <%= listing.location %></p>
+                  <p class="card-text">Country: <%= listing.country %></p>
+                </div>
+
+                <% }) %> <% } else { %>
+                <p>No listing found.</p>
+                <% } %>
+              </div>
+              <!-- </ul> -->
+            </div>
+            <!-- </div> -->
+          </div>
+        </ul>
+      </h2>
+    </div>
+  </div>
+</div>

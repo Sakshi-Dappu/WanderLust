@@ -39,17 +39,34 @@
       <a class="nav-link" href="/listings">Explore</a>
 
       <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search">
+        <!-- <form class="d-flex" role="search"> -->
+          <form method="GET" class="d-flex" role="search" action="/search">
           <input
             class="form-control me-2 search-inp"
             type="search"
             placeholder="Search destinations"
+            name="query"
           />
-          <a href="/search"><button class="btn btn-search" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>Search
-          </button></a>
+          <form methodd="GET" class="d-flex" role="search" action="/search">
+          <button class="btn btn-search" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
         </form>
       </div>
+
+      <!-- <div class="search"> -->
+        <!-- <div class="search-box navbar-nav ms-auto"> -->
+        <!-- <form method="GET" class="d-flex" role="search" action="/search"> -->
+          
+          <!-- <input  style="width: 25rem; border: white; height:2.5rem; border-radius: 1rem;"   type="search" name="query"  placeholder="   Search...."  required>&nbsp;&nbsp; -->
+         
+          <!-- <button class="btn  btn-outline-light btn-block search_submit" type="submit">Search</button> -->
+        <!-- </form> -->
+      <!-- </div> -->
+      <!-- </div> -->
+    <!-- </ul> -->
+
+
 
       <div class="navbar-nav ms-auto">
         <a class="nav-link" href="/listings/new">Airbnb your home</a>

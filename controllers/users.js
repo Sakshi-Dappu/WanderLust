@@ -1,4 +1,4 @@
-const User = require("../models/user");
+const User = require("../models/user.js");
   
 
 
@@ -24,7 +24,7 @@ module.exports.signup = async (req, res) => {
     res.redirect("/signup");
   }
 };
-
+//m
 module.exports.rederLoginForm = (req, res) => {
   res.render("users/login.ejs");
 };

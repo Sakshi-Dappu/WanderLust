@@ -16,15 +16,13 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
-//const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+//const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";x
 const dbUrl = process.env.ATLASDB_URL;
 
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
-
-// const listings = require("./routes/listing.js");
-// const reviews = require("./routes/review.js");
+const Listing = require("./models/listing.js");
 
 main()
   .then(() => {
@@ -90,8 +88,26 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/search", (req, res) => {
-  res.send("Search");
+app.get("/search", async(req, res) => {
+  try {
+    const query = req.query.query;
+    const listing = await Listing.find({
+      $or: [
+          { title: new RegExp(query, "i") },
+          { country: new RegExp(query, "i") },
+          { location: new RegExp(query, "i") }
+      ]
+  });
+    // await Listing.find({ title: new RegExp(query, "i") || country: new RegExp(query, "i") || location: new RegExp(query, "i")});
+  console.log(listing);
+    res.render("listings/search.ejs", {
+    query, listing, Listing,
+  
+  });
+} catch {
+console.error(error);
+res.status(500).send("An error occurred while searching. ");
+}
 });
 
 app.get("/", (req, res) => {
@@ -110,7 +126,7 @@ app.use((err, req, res, next) => {
   let { statusCode = 500, message = "Something went wrong!" } = err;
   res.status(statusCode).render("listings/error.ejs", { message });
 });
-
+ 
 app.listen(8080, () => {
   console.log("server is listening to port 8080");
 });

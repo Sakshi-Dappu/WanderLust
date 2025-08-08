@@ -2,19 +2,20 @@ const Listing = require("../models/listing.js");
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //(mapbox configurations)
-const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
-const mapToken = process.env.MAP_TOKEN;
-const geocodingClient = mbxGeocoding({ accessToken: mapToken });
+// const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
+// const mapToken = process.env.MAP_TOKEN;
+// const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
 module.exports.index = async (req, res) => {
   const allListings = await Listing.find({});
   res.render("listings/index.ejs", { allListings });
-};
+}; 
 
 module.exports.renderNewForm = (req, res) => {
+  console.log(req.user._id);
   res.render("listings/new.ejs");
 };
-
+ 
 module.exports.showListing = async (req, res) => { 
   let { id } = req.params;
   const listing = await Listing.findById(id)
@@ -33,24 +34,26 @@ module.exports.showListing = async (req, res) => {
   res.render("listings/show.ejs", { listing });
 };
 
-module.exports.createListing = async (req, res, next) => {
-  let response = await geocodingClient
-    .forwardGeocode({
-      query: req.body.listing.location,
-      limit: 1,
-    })
-    .send();
+module.exports.createListing = async (req, res) => {
+  // let response = await geocodingClient
+  //   .forwardGeocode({
+  //     query: req.body.listing.location,
+  //     limit: 1,
+  //   })
+  //   .send();
 
   let url = req.file.path;
   let filename = req.file.filename;
-
+    
   const newListing = new Listing(req.body.listing);
   newListing.image = { url, filename };
   newListing.owner = req.user._id;
-  newListing.geometry = response.body.features[0].geometry;
+  // newListing.geometry = response.body.features[0].geometry;
+  console.log(newListing);
   await newListing.save();
   req.flash("success", "New Listing Created!");
-  res.redirect("/listings");
+  // res.redirect("/listings");
+  res.redirect("http://localhost:8080/listings");
 };
 
 module.exports.renderEditForm = async (req, res) => {
@@ -65,7 +68,7 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateListing = async (req, res) => {
   let { id } = req.params;
-  let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+  let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing, Updated_at: new Date().toLocaleString() });
 
   if (typeof req.file !== "undefined") {
     let url = req.file.path;
