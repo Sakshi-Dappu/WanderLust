@@ -16,23 +16,19 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
-<<<<<<< HEAD
 //const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";x
-=======
 //const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
->>>>>>> a3b43e837f37d6c6de7b8f8cbe5b0446cdd72cb9
+
 const dbUrl = process.env.ATLASDB_URL;
 
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
-<<<<<<< HEAD
+
 const Listing = require("./models/listing.js");
-=======
 
 // const listings = require("./routes/listing.js");
 // const reviews = require("./routes/review.js");
->>>>>>> a3b43e837f37d6c6de7b8f8cbe5b0446cdd72cb9
 
 main()
   .then(() => {
@@ -94,35 +90,50 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
-  res.locals.currUser = req.user; 
+  res.locals.currUser = req.user;
   next();
 });
 
-<<<<<<< HEAD
-app.get("/search", async(req, res) => {
-  try {
-    const query = req.query.query;
+// app.get("/search", async(req, res) => {
+//   try {
+//     const query = req.query.query;
+//     const listing = await Listing.find({
+//       $or: [
+//           { title: new RegExp(query, "i") },
+//           { country: new RegExp(query, "i") },
+//           { location: new RegExp(query, "i") }
+//       ]
+//   });
+//     // await Listing.find({ title: new RegExp(query, "i") || country: new RegExp(query, "i") || location: new RegExp(query, "i")});
+//   console.log(listing);
+//     res.render("listings/search.ejs", {
+//     query, listing, Listing,
+
+//   });
+// } catch {
+// console.error(error);
+// res.status(500).send("An error occurred while searching. ");
+// }
+
+app.get("/search", async (req, res) => {
+try {
+    const query = req.query.query; // e.g. "Himalayan View Resort"
+
+    if (!query || query.trim() === "") {
+      return res.render("listings/search", { listing: [], query: "" });
+    }
+
+    // Find listings with title containing query (case-insensitive)
     const listing = await Listing.find({
-      $or: [
-          { title: new RegExp(query, "i") },
-          { country: new RegExp(query, "i") },
-          { location: new RegExp(query, "i") }
-      ]
-  });
-    // await Listing.find({ title: new RegExp(query, "i") || country: new RegExp(query, "i") || location: new RegExp(query, "i")});
-  console.log(listing);
-    res.render("listings/search.ejs", {
-    query, listing, Listing,
-  
-  });
-} catch {
-console.error(error);
-res.status(500).send("An error occurred while searching. ");
-}
-=======
-app.get("/search", (req, res) => {
-  res.send("Search");
->>>>>>> a3b43e837f37d6c6de7b8f8cbe5b0446cdd72cb9
+      title: { $regex: query, $options: "i" } // "i" → ignore case
+    });
+    console.log(listing[0]._id);
+
+    res.render("listings/search", { listing, query });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
 });
 
 app.get("/", (req, res) => {
@@ -141,11 +152,7 @@ app.use((err, req, res, next) => {
   let { statusCode = 500, message = "Something went wrong!" } = err;
   res.status(statusCode).render("listings/error.ejs", { message });
 });
-<<<<<<< HEAD
- 
-=======
 
->>>>>>> a3b43e837f37d6c6de7b8f8cbe5b0446cdd72cb9
 app.listen(8080, () => {
   console.log("server is listening to port 8080");
 });

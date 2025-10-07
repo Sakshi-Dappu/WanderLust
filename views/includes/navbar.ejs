@@ -39,57 +39,31 @@
       <a class="nav-link" href="/listings">Explore</a>
 
       <div class="navbar-nav ms-auto">
-<<<<<<< HEAD
-        <!-- <form class="d-flex" role="search"> -->
-          <form method="GET" class="d-flex" role="search" action="/search">
-=======
-        <form class="d-flex" role="search">
->>>>>>> a3b43e837f37d6c6de7b8f8cbe5b0446cdd72cb9
-          <input
-            class="form-control me-2 search-inp"
-            type="search"
-            placeholder="Search destinations"
-<<<<<<< HEAD
-            name="query"
-          />
-          <form methodd="GET" class="d-flex" role="search" action="/search">
-          <button class="btn btn-search" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
+        <form method="GET" class="d-flex" role="search" action="/search">
+          <form class="d-flex" role="search">
+            <input
+              class="form-control me-2 search-inp"
+              type="search"
+              placeholder="Search destinations"
+              name="query"
+            />
+            <form methodd="GET" class="d-flex" role="search" action="/search">
+              <button class="btn btn-search" type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </form>
+          </form>
+
+          <div class="navbar-nav ms-auto">
+            <a class="nav-link" href="/listings/new">Airbnb your home</a>
+            <% if(!currUser) { %>
+            <a class="nav-link" href="/signup"><b>Sign Up</b></a>
+            <a class="nav-link" href="/login"><b>Log in</b></a>
+            <% } %> <% if(currUser) { %>
+            <a class="nav-link" href="/logout">Log out</a>
+            <% } %>
+          </div>
         </form>
-      </div>
-
-      <!-- <div class="search"> -->
-        <!-- <div class="search-box navbar-nav ms-auto"> -->
-        <!-- <form method="GET" class="d-flex" role="search" action="/search"> -->
-          
-          <!-- <input  style="width: 25rem; border: white; height:2.5rem; border-radius: 1rem;"   type="search" name="query"  placeholder="   Search...."  required>&nbsp;&nbsp; -->
-         
-          <!-- <button class="btn  btn-outline-light btn-block search_submit" type="submit">Search</button> -->
-        <!-- </form> -->
-      <!-- </div> -->
-      <!-- </div> -->
-    <!-- </ul> -->
-
-
-
-=======
-          />
-          <a href="/search"><button class="btn btn-search" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>Search
-          </button></a>
-        </form>
-      </div>
-
->>>>>>> a3b43e837f37d6c6de7b8f8cbe5b0446cdd72cb9
-      <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="/listings/new">Airbnb your home</a>
-        <% if(!currUser) { %>
-        <a class="nav-link" href="/signup"><b>Sign Up</b></a>
-        <a class="nav-link" href="/login"><b>Log in</b></a>
-        <% } %> <% if(currUser) { %>
-        <a class="nav-link" href="/logout">Log out</a>
-        <% } %>
       </div>
     </div>
   </div>
